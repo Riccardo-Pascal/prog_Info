@@ -2,6 +2,14 @@
 
 using namespace std;
 
+void menu(){
+
+    cout<<"ciao";
+
+
+}
+
+
 int main()
 {
     cout << "Hello world!" << endl;
