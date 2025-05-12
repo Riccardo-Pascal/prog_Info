@@ -1,9 +1,15 @@
 #ifndef INSERIMENTO_H_INCLUDED
 #define INSERIMENTO_H_INCLUDED
+#include "strutture.h"
+#include <fstream>
 #include <string>
 
+using namespace std;
 
-void ins(string codC,string descrC,string codM,string descrM,string mat,string cognS,string nomeS,string labels){
+
+void inserimento(string labels,vector <studente> &info,vector <materia> &infoMat,vector <corso> &infoCors){
+
+    ifstream fin("corsi_studenti.csv",ios::in);
     //input labels
     getline(fin,labels);
     while(!fin.eof()){
@@ -39,5 +45,6 @@ void ins(string codC,string descrC,string codM,string descrM,string mat,string c
         infoCors.push_back(c);
 
     }
+    fin.close();
 }
 #endif // INSERIMENTO_H_INCLUDED
