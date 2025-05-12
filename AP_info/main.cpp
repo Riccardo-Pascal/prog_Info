@@ -1,6 +1,7 @@
 #include <iostream>
-#include <list>
+#include <vector>
 #include <fstream>
+#include "inserimento.h"
 
 using namespace std;
 
@@ -22,14 +23,24 @@ void menu(){
 }
 
 struct studente{
-
-    string cod_corso;
-    string descr_cor;
-    string cod_mat;
-    string descr_mat;
-    int matStud;
+    int matr;
     string cogn;
     string nome;
+    string cod_corso;
+
+
+};
+struct materia{
+
+    string cod_materia;
+    string descr_materia;
+    string cod_corso;
+};
+
+struct corso{
+
+    string cod_corso;
+    string descr_corso;
 
 };
 int main()
@@ -38,7 +49,11 @@ int main()
     char scelta;
     string labels;
 
-    list <studente> info;
+    vector <studente> info;
+    vector <materia> infoMat;
+    vector <corso> infoCors;
+
+    map <string,>
 
 
     menu();
@@ -76,19 +91,21 @@ int main()
                     //nome_studente
                     getline(fin,nomeS);
 
-                    studente p{codC,descrC,codM,descrM,matS,cognS,nomeS};
-
+                    //popolo vector info
+                    studente p{matS,cognS,nomeS,codC};
                     info.push_back(p);
+
+                    //popolo vector infoMat
+                    materia s{codM,descrM,codC};
+                    infoMat.push_back(s);
+
+                    //popolo vector infoCorso
+                    corso c{codC,descrC};
+                    infoCors.push_back(c);
 
                 }
 
                 fin.close();
-
-                for(auto x : info){
-                    cout<<x.cod_corso<<endl;
-
-                }
-
 
 
         }
