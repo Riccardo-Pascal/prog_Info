@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1747462264 source:d:\users\petroner\downloads\portablegit\prog_info\ap_info\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<map>
+	"inserimento.h"
+
+1747462264 d:\users\petroner\downloads\portablegit\prog_info\ap_info\inserimento.h
+	"strutture.h"
+	<fstream>
+	<string>
+
+1747462264 d:\users\petroner\downloads\portablegit\prog_info\ap_info\strutture.h
+	<string>
+

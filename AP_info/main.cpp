@@ -23,6 +23,14 @@ void menu(){
 
 }
 
+void mappaCorsi(map<long int,string> &corsiPerMatricola,vector <studente> info,vector <corso> infoCors){
+
+    for(int i = 0;i<info.size();i++){
+
+        corsiPerMatricola[info[i].matr] = infoCors[i].descr_corso;
+    }
+}
+
 
 int main()
 {
@@ -34,7 +42,8 @@ int main()
     vector <materia> infoMat;
     vector <corso> infoCors;
 
-    map<int,string> corsiPerMatricola;
+    //punto 1
+    map<long int,string> corsiPerMatricola;
 
 
     menu();
@@ -51,9 +60,21 @@ int main()
 
                 break;
 
+            case '1':
+                mappaCorsi(corsiPerMatricola,info,infoCors);
+
+                for(auto x :  corsiPerMatricola){
+
+                    cout<<x.first<<"  :  "<<x.second<<endl;
+                }
+                break;
+
 
 
         }
+
+        menu();
+        cin>>scelta;
 
     }
 

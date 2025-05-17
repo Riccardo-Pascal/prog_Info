@@ -5,7 +5,7 @@
 using namespace std;
 
 struct studente{
-    int matr;
+    long int matr;
     string cogn;
     string nome;
     string cod_corso;
