@@ -9,8 +9,6 @@ struct studente{
     string cogn;
     string nome;
     string cod_corso;
-
-
 };
 struct materia{
 

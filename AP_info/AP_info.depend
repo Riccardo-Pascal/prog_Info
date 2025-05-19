@@ -29,3 +29,26 @@
 1747645729 c:\users\petroner\desktop\portablegit\prog_info\ap_info\strutture.h
 	<string>
 
+1747689465 source:c:\users\ricca\onedrive\desktop\portablegit\prog_info\ap_info\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<map>
+	"inserimento.h"
+
+1747689478 c:\users\ricca\onedrive\desktop\portablegit\prog_info\ap_info\inserimento.h
+	"strutture.h"
+	<fstream>
+	<string>
+	<map>
+
+1747685420 c:\users\ricca\onedrive\desktop\portablegit\prog_info\ap_info\strutture.h
+	<string>
+
+1747679762 c:\users\ricca\onedrive\desktop\portablegit\prog_info\ap_info\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<map>
+	"inserimento.h"
+
