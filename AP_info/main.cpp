@@ -23,14 +23,19 @@ void menu(){
 
 }
 
-void mappaCorsi(map<long int,string> &corsiPerMatricola,vector <studente> info,vector <corso> infoCors){
+void studentiScrittiCorso(map <string,vector<string>> &corsoStudenti,vector <studente> info,vector <corso> infoCors,string cod){
 
-    for(int i = 0;i<info.size();i++){
+    for(auto x : infoCors){
+        if(x.cod_corso == cod){
 
-        corsiPerMatricola[info[i].matr] = infoCors[i].descr_corso;
+            for(auto t : info){
+
+                corsoStudenti[x.descr_corso].push_back(t.cogn);
+            }
+            break;
+        }
     }
 }
-
 
 int main()
 {
@@ -43,7 +48,14 @@ int main()
     vector <corso> infoCors;
 
     //punto 1
-    map<long int,string> corsiPerMatricola;
+    long int mat_utente;
+
+    //punto 2
+    string cogn_utente;
+
+    //punto 3
+    map <string,vector<string>> corsoStudenti;
+    string cod;
 
 
     menu();
@@ -60,15 +72,65 @@ int main()
 
                 break;
 
-            case '1':
-                mappaCorsi(corsiPerMatricola,info,infoCors);
+            case '1':{
+                cout<<"Inserisci una matricola : ";
+                cin>>mat_utente;
+                string codice;
 
-                for(auto x :  corsiPerMatricola){
+                for(auto x : info){
+                    if(x.matr == mat_utente){
+                        codice = x.cod_corso;
+                    }
+                }
 
-                    cout<<x.first<<"  :  "<<x.second<<endl;
+                for(auto x : infoCors){
+                    if(codice == x.cod_corso){
+                        cout<<mat_utente<<"  :  "<<x.descr_corso<<endl;
+                    }
+                    break;
                 }
                 break;
+            }
 
+            case '2':{
+
+                cout<<"Inserisci un cognome : ";
+                cin>>cogn_utente;
+                string c;
+
+                for(auto x : info){
+                    if(x.cogn == cogn_utente){
+                        c = x.cod_corso;
+                    }
+                    break;
+                }
+
+                for(auto x : infoCors){
+                    if(c == x.cod_corso){
+                        cout<<cogn_utente<<"  :  "<<x.descr_corso<<endl;
+                    }
+                    break;
+                }
+                break;
+            }
+
+            case '3':
+                cout<<"Inserisci il codice di un corso: ";
+                cin>>cod;
+
+
+
+                studentiScrittiCorso(corsoStudenti,info,infoCors,cod);
+
+                for(auto x : corsoStudenti){
+
+                    for(auto t : x.second){
+
+                        cout<<x.first<<"  :  "<<t<<endl;
+
+                    }
+                }
+                break;
 
 
         }

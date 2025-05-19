@@ -14,3 +14,18 @@
 1747462264 d:\users\petroner\downloads\portablegit\prog_info\ap_info\strutture.h
 	<string>
 
+1747648262 source:c:\users\petroner\desktop\portablegit\prog_info\ap_info\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<map>
+	"inserimento.h"
+
+1747645729 c:\users\petroner\desktop\portablegit\prog_info\ap_info\inserimento.h
+	"strutture.h"
+	<fstream>
+	<string>
+
+1747645729 c:\users\petroner\desktop\portablegit\prog_info\ap_info\strutture.h
+	<string>
+
