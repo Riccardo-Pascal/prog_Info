@@ -52,3 +52,19 @@
 	<map>
 	"inserimento.h"
 
+1747811662 source:d:\users\albarellis\desktop\portablegit\prog_info\ap_info\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<map>
+	"inserimento.h"
+
+1747811774 d:\users\albarellis\desktop\portablegit\prog_info\ap_info\inserimento.h
+	"strutture.h"
+	<fstream>
+	<string>
+	<map>
+
+1747811021 d:\users\albarellis\desktop\portablegit\prog_info\ap_info\strutture.h
+	<string>
+

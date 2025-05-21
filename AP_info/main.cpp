@@ -6,10 +6,6 @@
 
 using namespace std;
 
-//map <string,vector<studente>> info;
-//map <string,vector<materia>> infoMat;
-//map <string,vector<corso>> infoCors;
-
 //Prototipi
 bool findName (vector<studente>  &studenti , long int matricola );
 
