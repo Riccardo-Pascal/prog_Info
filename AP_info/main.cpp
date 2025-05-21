@@ -112,8 +112,25 @@ map<vector<materia>,vector<studente>> esamiPerCorso(string codiceCorso,map<vecto
 
     return esamiStudente;
 }
-//punto 5
 
+//punto 5
+int contaStudentiPerCorso (string codiceCorso,map<long int, int> &matPerStudenti){
+    int contatore = 0;
+    for(auto corsoMateriaStudente : universita){
+        for(auto materiaStudente : corsoMateriaStudente.second){
+            for(auto studenti : materiaStudente.second){
+                if(codiceCorso == studenti.cod_corso){
+                    matPerStudenti[studenti.matr]++;
+                }
+            }
+        }
+    }
+
+    for(auto x : matPerStudenti){
+        contatore++;
+    }
+    return contatore;
+}
 
 int main()
 {
@@ -132,6 +149,9 @@ int main()
 
     //punto 4
     map<vector<materia>,vector<studente>> esamiStudente;
+
+    //punto 5
+    map<long int, int> matPerStudenti;
 
     menu();
     cout<<"Fai la tua scelta: ";
@@ -193,9 +213,14 @@ int main()
                 }
                 break;
 
+            case '5':
+                cout<<"Inserisci il codice di un corso: ";
+                cin>>cod;
+                cout<<cod<<" : ";
 
+                cout<<contaStudentiPerCorso(cod,matPerStudenti)<<endl;
 
-
+                break;
 
         }
         menu();

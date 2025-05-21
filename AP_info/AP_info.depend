@@ -52,3 +52,19 @@
 	<map>
 	"inserimento.h"
 
+1747813614 source:d:\users\petroner\desktop\petrone\prog_info\ap_info\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<map>
+	"inserimento.h"
+
+1747813124 d:\users\petroner\desktop\petrone\prog_info\ap_info\inserimento.h
+	"strutture.h"
+	<fstream>
+	<string>
+	<map>
+
+1747813124 d:\users\petroner\desktop\petrone\prog_info\ap_info\strutture.h
+	<string>
+
