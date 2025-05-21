@@ -10,6 +10,7 @@ struct studente{
     string nome;
     string cod_corso;
 };
+
 struct materia{
 
     string cod_materia;

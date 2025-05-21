@@ -6,10 +6,15 @@
 
 using namespace std;
 
-//Prototipi
-bool findName (vector<studente>  &studenti , long int matricola );
-
 map<corso,map<materia,vector<studente>>> universita;
+
+//controllo per evitare duplicati
+bool findName (vector<studente>  &studenti , long int matricola ){
+    for(auto studente : studenti){
+        if (studente.matr == matricola) return true;
+    }
+    return false;
+}
 
 void menu(){
 
@@ -27,16 +32,16 @@ void menu(){
     cout<<"X. Esci"<<endl;
 
 }
-//punto 1
 
+//punto 1
 string matricolaPerCorso(long int matricola){
-    string toReturn;
+    string cod;
 
     for(auto corsoMateriaStudente : universita){
         for (auto corsoStudente : corsoMateriaStudente.second){
             for(auto studenti : corsoStudente.second){
                 if (studenti.matr == matricola){
-                    toReturn = studenti.cod_corso;
+                    cod = studenti.cod_corso;
                     break;
                 }
             }
@@ -44,77 +49,71 @@ string matricolaPerCorso(long int matricola){
     }
 
     for(auto corsoMateriaStudente : universita){
-        if (corsoMateriaStudente.first.cod_corso == toReturn){
-            toReturn = corsoMateriaStudente.first.descr_corso;
+        if (corsoMateriaStudente.first.cod_corso == cod){
+            cod = corsoMateriaStudente.first.descr_corso;
             break;
         }
     }
 
-    return toReturn;
+    return cod;
 }
-//punto 2
-/*string cognomePerCorso(string cogn_utente){
-
-    string codice;
-    for(auto x : info){
-        for(auto t : x.second){
-            if(t.cogn == cogn_utente){
-                codice = x.first;
-                break;
-            }
-        }
-    }
-    for(auto x : infoCors){
-        for(auto t : x.second){
-            if(codice == x.first) return t.descr_corso;
-        }
-    }
-}*/
 
 //punto 2
 string cognomePerCorso(string cogn_utente){
-    string toReturn;
+    string cod;
 
     for(auto corsoMateriaStudente : universita){
         for(auto materiaStudente : corsoMateriaStudente.second){
             for(auto studenti : materiaStudente.second){
-                if(cogn_utente == studenti.cogn)    toReturn = studenti.cod_corso;
+                if(cogn_utente == studenti.cogn)    cod = studenti.cod_corso;
             }
         }
     }
 
     for(auto corsoMateriaStudente : universita){
-        if(corsoMateriaStudente.first.cod_corso == toReturn)    toReturn = corsoMateriaStudente.first.descr_corso;
+        if(corsoMateriaStudente.first.cod_corso == cod)    cod = corsoMateriaStudente.first.descr_corso;
     }
 
-    return toReturn;
+    return cod;
 
 }
 
-
 //punto 3
-vector<studente> studentiPerCorso(map<corso,map<materia,vector<studente>>> &universita, string codiceCorso){
-    vector<studente> toReturn;
+vector<studente> studentiPerCorso(string codiceCorso){
+    vector<studente> stud;
 
     for(auto corsoMateriaStudente : universita){
         for (auto corsoStudente : corsoMateriaStudente.second){
-            for(auto studente : corsoStudente.second){
-                if (studente.cod_corso == codiceCorso and !findName(toReturn, studente.matr)){
-                    toReturn.push_back(studente);
+            for(auto studenti : corsoStudente.second){
+                if (studenti.cod_corso == codiceCorso and !findName(stud, studenti.matr)){
+                    stud.push_back(studenti);
                 }
             }
         }
     }
 
-    return toReturn;
+    return stud;
 }
-//per evitare duplicati
-bool findName (vector<studente>  &studenti , long int matricola ){
-    for(auto studente : studenti){
-        if (studente.matr == matricola) return true;
+
+//punto 4
+map<vector<materia>,vector<studente>> esamiPerCorso(string codiceCorso,map<vector<materia>,vector<studente>> &esamiStudente){
+
+    for(auto corsoMateriaStudente : universita){
+        if(corsoMateriaStudente.first.cod_corso == codiceCorso){
+            for(auto materiaStudente : corsoMateriaStudente.second){
+                vector<materia> mat {materiaStudente.first};
+
+                for(auto studenti : materiaStudente.second){
+                    esamiStudente[mat].push_back(studenti);
+                }
+            }
+        }
     }
-    return false;
+
+    return esamiStudente;
 }
+//punto 5
+
 
 int main()
 {
@@ -129,9 +128,10 @@ int main()
     string cogn_utente;
 
     //punto 3
-    map<string,map<long int,vector<studente>>> studentePerCorso;
     string cod;
 
+    //punto 4
+    map<vector<materia>,vector<studente>> esamiStudente;
 
     menu();
     cout<<"Fai la tua scelta: ";
@@ -161,32 +161,43 @@ int main()
                 cout<<"Inserisci un cognome : ";
                 cin>>cogn_utente;
 
-                //cout<<cogn_utente<<" : "<<cognomePerCorso(cogn_utente)<<endl;
-
                 cout<<cogn_utente<<" : "<<cognomePerCorso(cogn_utente)<<endl;
 
                 break;
-
 
             case '3':
                 cout<<"Inserisci il codice di un corso: ";
                 cin>>cod;
 
-                //costruisciMappa(studentePerCorso);
-                for(auto studente : studentiPerCorso(universita,cod)){
-                    cout<<studente.matr<<endl;
+                for(auto studenti : studentiPerCorso(cod)){
+                    cout<<cod<<" : "<<studenti.cogn<<","<<studenti.nome<<","<<studenti.matr<<endl;
                 }
-
 
                 break;
 
+            case '4':
+                cout<<"Inserisci il codice di un corso: ";
+                cin>>cod;
+
+                for (auto studenti : esamiPerCorso(cod, esamiStudente)) {
+                    for (auto z : studenti.first) {
+                        for (auto x : studenti.second)  {
+                            cout << cod << " : "
+                                 << z.cod_materia << ","
+                                 << z.descr_materia << ","
+                                 << x.cogn << ","
+                                 << x.nome << ","
+                                 << x.matr << endl;
+                        }
+                    }
+                }
+                break;
 
 
 
 
 
         }
-
         menu();
         cin>>scelta;
 

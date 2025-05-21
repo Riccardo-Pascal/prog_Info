@@ -48,7 +48,6 @@ void inserimento(string labels,map<corso,map<materia,vector<studente>>> &univers
 
     }
     fin.close();
-
 }
 
 
