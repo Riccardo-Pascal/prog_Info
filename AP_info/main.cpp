@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <fstream>
 #include <map>
+#include <set>
 #include "inserimento.h"
 
 using namespace std;
@@ -17,20 +19,19 @@ bool findName (vector<studente>  &studenti , long int matricola ){
 }
 
 void menu(){
-
-    cout<<"====== GESTIONE UNIVERSITARIA ======"<<endl;
-    cout<<"0. Carica dati da file"<<endl;
-    cout<<"1. Cerca corsi di uno studente (matricola)"<<endl;
-    cout<<"2. Cerca corsi di uno studente (cognome)"<<endl;
-    cout<<"3. Elenca studenti iscritti ad un corso"<<endl;
-    cout<<"4. Stampa dati esami di un corso"<<endl;
-    cout<<"5. Numero di studenti per corso"<<endl;
-    cout<<"6. Numero di materie per corso"<<endl;
-    cout<<"7. Cerca materie per descrizione"<<endl;
-    cout<<"8. Inserisci nuovo studente"<<endl;
-    cout<<"9. Salva i dati su file"<<endl;
-    cout<<"X. Esci"<<endl;
-
+    cout<<"============ GESTIONE UNIVERSITARIA ============"<<endl;
+    cout<<"0. Carica dati da file                         ="<<endl;
+    cout<<"1. Cerca corsi di uno studente (matricola)     ="<<endl;
+    cout<<"2. Cerca corsi di uno studente (cognome)       ="<<endl;
+    cout<<"3. Elenca studenti iscritti ad un corso        ="<<endl;
+    cout<<"4. Stampa dati esami di un corso               ="<<endl;
+    cout<<"5. Numero di studenti per corso                ="<<endl;
+    cout<<"6. Numero di materie per corso                 ="<<endl;
+    cout<<"7. Cerca materie per descrizione               ="<<endl;
+    cout<<"8. Inserisci nuovo studente                    ="<<endl;
+    cout<<"9. Salva i dati su file                        ="<<endl;
+    cout<<"X. Esci                                        ="<<endl;
+    cout<<"================================================"<<endl;
 }
 
 //punto 1
@@ -79,7 +80,7 @@ string cognomePerCorso(string cogn_utente){
 }
 
 //punto 3
-vector<studente> studentiPerCorso(string codiceCorso){
+vector<studente> matricolaCorso(string codiceCorso){
     vector<studente> stud;
 
     for(auto corsoMateriaStudente : universita){
@@ -114,22 +115,47 @@ map<vector<materia>,vector<studente>> esamiPerCorso(string codiceCorso,map<vecto
 }
 
 //punto 5
-int contaStudentiPerCorso (string codiceCorso,map<long int, int> &matPerStudenti){
-    int contatore = 0;
+int contaStudentiPerCorso (string codiceCorso,set<long int> &matPerStudenti){
     for(auto corsoMateriaStudente : universita){
         for(auto materiaStudente : corsoMateriaStudente.second){
             for(auto studenti : materiaStudente.second){
                 if(codiceCorso == studenti.cod_corso){
-                    matPerStudenti[studenti.matr]++;
+                    matPerStudenti.insert(studenti.matr);
                 }
             }
         }
     }
 
-    for(auto x : matPerStudenti){
-        contatore++;
+
+
+    return matPerStudenti.size();
+}
+
+//punto 6
+int materiePerCorso(string codiceCorso){
+
+    for(auto corsoMateriaStudente : universita){
+            return corsoMateriaStudente.second.size();
     }
-    return contatore;
+}
+
+//punto 7
+map<string,string> descrPerMateria(string descr,map<string,string> &descrMateria){
+
+    transform(descr.begin(),descr.end(),descr.begin(),::tolower);
+    for(auto corsoMateriaStudente : universita){
+        for(auto materiaStudente : corsoMateriaStudente.second){
+            //converto la parola in minuscolo
+            string materia = materiaStudente.first.descr_materia;
+            transform(materia.begin(),materia.end(),materia.begin(),::tolower);
+
+            if(materia.find(descr) != string::npos){
+
+                descrMateria[materiaStudente.first.descr_materia] = materiaStudente.first.cod_materia;
+            }
+        }
+    }
+    return descrMateria;
 }
 
 int main()
@@ -151,7 +177,18 @@ int main()
     map<vector<materia>,vector<studente>> esamiStudente;
 
     //punto 5
-    map<long int, int> matPerStudenti;
+    set<long int> matPerStudenti;
+
+    //punto 6
+    map<string,map<long int,studente>> studenteCorso;
+
+    //punto 7
+    string descr;
+    map<string,string> descrMateria;
+
+    //punto 8
+    string materia,nome,cogn;
+    long int matr;
 
     menu();
     cout<<"Fai la tua scelta: ";
@@ -189,9 +226,11 @@ int main()
                 cout<<"Inserisci il codice di un corso: ";
                 cin>>cod;
 
-                for(auto studenti : studentiPerCorso(cod)){
+                for(auto studenti : matricolaCorso(cod)){
                     cout<<cod<<" : "<<studenti.cogn<<","<<studenti.nome<<","<<studenti.matr<<endl;
                 }
+
+
 
                 break;
 
@@ -211,6 +250,8 @@ int main()
                         }
                     }
                 }
+                esamiStudente.clear();
+
                 break;
 
             case '5':
@@ -221,6 +262,32 @@ int main()
                 cout<<contaStudentiPerCorso(cod,matPerStudenti)<<endl;
 
                 break;
+
+            case '6':
+                cout<<"Inserisci il codice di un corso: ";
+                cin>>cod;
+
+                cout<<cod<<" : "<<materiePerCorso(cod)<<" materie"<<endl;
+
+
+                break;
+
+
+
+            case '7':
+                cout<<"Inserire la descrizione della materia : ";
+                cin>>descr;
+
+                for(auto materia : descrPerMateria(descr,descrMateria)){
+                    cout<<materia.second<<" - "<<materia.first<<endl;
+                }
+                descrMateria.clear();
+
+            break;
+
+
+
+
 
         }
         menu();

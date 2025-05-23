@@ -14,7 +14,7 @@ bool operator<(const corso& a, const corso& b) {
     return a.cod_corso < b.cod_corso;
 }
 
-void inserimento(string labels,map<corso,map<materia,vector<studente>>> &universita){
+void inserimento(string &labels,map<corso,map<materia,vector<studente>>> &universita){
     ifstream fin("corsi_studenti.csv",ios::in);
     //input labels
     getline(fin,labels);
