@@ -158,6 +158,20 @@ map<string,string> descrPerMateria(string descr,map<string,string> &descrMateria
     return descrMateria;
 }
 
+//punto 8
+void inserimentoConMateria(long int matr,string cogn,string nome,string materia){
+    for(auto &corsoMateriaStudente : universita){
+        for(auto& materiaStudente : corsoMateriaStudente.second){
+            if(materiaStudente.first.cod_materia == materia){
+                studente ins{matr,cogn,nome,corsoMateriaStudente.first.cod_corso};
+
+                materiaStudente.second.push_back(ins);
+
+            }
+        }
+    }
+}
+
 int main()
 {
     //dichiarazione variabili;
@@ -283,7 +297,39 @@ int main()
                 }
                 descrMateria.clear();
 
-            break;
+            case '8':
+
+                cout<<"Inserisci il codice della materia che frequenti: ";
+                cin>>materia;
+                cout<<"Inserisci il nome :  ";
+                cin>>nome;
+                cout<<"Inserisci il cognome :  ";
+                cin>>cogn;
+                cout<<"Inserisci la matricola :  ";
+                cin>>matr;
+
+                inserimentoConMateria(matr,cogn,nome,materia);
+
+                break;
+
+            case '9':
+
+                ofstream fout("corsi_studenti.csv");
+
+                fout<<labels<<endl;
+                for(auto corsoMateriaStudente : universita){
+                    for(auto materiaStudente : corsoMateriaStudente.second){
+                        for(auto studenti : materiaStudente.second){
+                            fout<<corsoMateriaStudente.first.cod_corso<<","<<corsoMateriaStudente.first.descr_corso<<","
+                            <<materiaStudente.first.cod_materia<<","<<materiaStudente.first.descr_materia<<","<<studenti.matr
+                            <<","<<studenti.cogn<<","<<studenti.nome<<endl;
+                        }
+                    }
+                }
+                break;
+
+                fout.close();
+
 
 
 
