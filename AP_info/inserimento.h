@@ -7,23 +7,15 @@
 
 using namespace std;
 
-bool operator<(const materia& a, const materia& b) {
-    return a.cod_materia < b.cod_materia;
-}
-bool operator<(const corso& a, const corso& b) {
-    return a.cod_corso < b.cod_corso;
-}
-
 void inserimento(string &labels,map<corso,map<materia,vector<studente>>> &universita){
     ifstream fin("corsi_studenti.csv",ios::in);
     //input labels
     getline(fin,labels);
-    while(!fin.eof()){
-        string codC,descrC,codM,descrM,mat,cognS,nomeS;
-        int matS;
+    string codC,descrC,codM,descrM,mat,cognS,nomeS;
+    int matS;
+    while(getline(fin,codC,',')){
 
         //input codice_corso
-        getline(fin,codC,',');
         if (codC == "") break;
         //descrizione_corso
         getline(fin,descrC,',');

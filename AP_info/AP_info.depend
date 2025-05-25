@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1748068066 source:d:\users\petroner\downloads\portablegit\prog_info\ap_info\main.cpp
+1748173661 source:c:\users\ricca\onedrive\desktop\portablegit\prog_info\ap_info\main.cpp
 	<iostream>
 	<vector>
 	<algorithm>
@@ -9,17 +9,18 @@
 	"inserimento.h"
 	"tools.h"
 
-1748067954 d:\users\petroner\downloads\portablegit\prog_info\ap_info\inserimento.h
+1748177121 c:\users\ricca\onedrive\desktop\portablegit\prog_info\ap_info\inserimento.h
 	"strutture.h"
 	<fstream>
 	<string>
 	<map>
 
-1748067012 d:\users\petroner\downloads\portablegit\prog_info\ap_info\strutture.h
+1748177622 c:\users\ricca\onedrive\desktop\portablegit\prog_info\ap_info\strutture.h
 	<string>
 
-1748068066 d:\users\petroner\downloads\portablegit\prog_info\ap_info\tools.h
+1748177558 c:\users\ricca\onedrive\desktop\portablegit\prog_info\ap_info\tools.h
 	<string>
 	<vector>
 	<map>
+	"strutture.h"
 

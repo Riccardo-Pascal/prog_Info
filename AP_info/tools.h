@@ -3,8 +3,16 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "strutture.h"
 
 map<corso,map<materia,vector<studente>>> universita;
+
+bool operator<(const materia& a, const materia& b) {
+    return a.cod_materia < b.cod_materia;
+}
+bool operator<(const corso& a, const corso& b) {
+    return a.cod_corso < b.cod_corso;
+}
 
 //controllo per evitare duplicati
 bool findName (vector<studente>  &studenti , long int matricola ){
